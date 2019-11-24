@@ -16,9 +16,19 @@ class InfoBox extends React.Component {
 
     toRender() {
         if (this.props.titleClicked.length) {
-            return (
-                <div>{this.props.titleClicked}</div>
-            )
+            var onRead = this.props.readToggle(this.props.titleClicked);
+            for(var i = 0; i < this.props.list.length; i++) {
+                if (this.props.list[i].title === this.props.titleClicked) {
+                    
+                    return (
+                        <div>
+                            Title: {this.props.list[i].title} <br/>
+                            Description: {this.props.list[i].info} <br/>
+                            <input type="checkbox" onClick={onRead} /> Read
+                        </div>
+                    )
+                }
+            }
         } else {
             return (
                 <div>Nothing Clicked Yet!</div>

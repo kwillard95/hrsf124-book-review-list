@@ -27,7 +27,7 @@ class NavBar extends React.Component {
             <input type="text" value={this.props.book} placeholder="Add New Book" onChange={this.props.onChange}></input>
             <button onClick={this.props.onClick}>Add Book</button>
             {this.props.list.map((book) => {
-                return <div onClick={this.props.onTitleClick} id={book}>{book}</div>
+                return <div ><u onClick={this.props.onTitleClick} id={book.title}>{book.title}</u></div>
             })}
             </div>
         </div>

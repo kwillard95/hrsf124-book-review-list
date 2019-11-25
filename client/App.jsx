@@ -28,20 +28,32 @@ class App extends React.Component {
       this.setState({currentBook: e.target.value})
     }
 
+    componentDidMount() {
+        
+    }
+
     onFormSubmit(e) {
       e.preventDefault();
       axios.post('/books', {title: this.state.currentBook})
-      .then((response) => {
-          console.log(response)
+      .then(() => {
+          axios.get('/books', {
+              params: {
+                  title: this.state.currentBook
+              }
+          })
+          .then((response) => {
+              response = response.data;
+                var bookObj = {
+                    title: response.book_title,
+                    info: response.summary,
+                    author: response.book_author,
+                    date: response.publication_dt,
+                    read: false,
+                }
+                this.list.push(bookObj);
+                this.setState({currentBook: ''})
+          })
       })
-      var bookObj = {
-          title: this.state.currentBook,
-          info: 'book info',
-          read: false,
-      }
-      this.list.push(bookObj);
-      this.setState({currentBook: ''})
-      //POST request
     }
 
     onReadToggle(title) {
